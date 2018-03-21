@@ -1,5 +1,5 @@
-hash: 5e7e2e2411708de8faf403a44695655be43a1b64a9b6347ca56d4a1d00c4653a
-updated: 2018-03-22T00:31:49.577010597+09:00
+hash: 1c4dda1392009e8f306bc6db680aae8a8ec52272de9e92792725cf4b0494c956
+updated: 2018-03-22T00:54:19.610991714+09:00
 imports:
 - name: github.com/apex/gateway
   version: 94cc84b10787c61dbfbe8dd549cbc5c5dc685d1f
@@ -10,11 +10,8 @@ imports:
   - lambda
   - lambda/messages
   - lambdacontext
-- name: github.com/awslabs/aws-lambda-go-api-proxy
-  version: 5aaec6761420bbbd4b1f4cf9e2d6eff552413986
-  subpackages:
-  - core
-  - handlerfunc
+- name: github.com/pkg/errors
+  version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
 - name: gopkg.in/go-playground/webhooks.v3
   version: f2acbcde401467ded7701fbbf7eabd7a0bb6702d
   subpackages:
