@@ -9,6 +9,5 @@ import:
   version: ^3.8.0
   subpackages:
   - github
-- package: github.com/awslabs/aws-lambda-go-api-proxy
-  subpackages:
-  - handlerfunc
+- package: github.com/apex/gateway
+  version: ^1.0.0
