@@ -1,17 +1,27 @@
 package main
 
 import (
-	"context"
 	"fmt"
+	"log"
 
-	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/aws/aws-lambda-go/events"
+	"github.com/apex/gateway"
+	"gopkg.in/go-playground/webhooks.v3"
+	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
-func HelloHandler(ctx context.Context, req events.APIGatewayProxyRequest) (string, error) {
-	return fmt.Sprintf("Hello %s", name), nil
+type serve struct {
+	hook             webhooks.Webhook
+	path             string
+	includePathCheck bool
 }
 
 func main() {
-	lambda.Start(HelloHandler)
+	hook := github.New(&github.Config{Secret: "hogehoge"})
+	hook.RegisterEvents(HandlePullRequest, github.PullRequestEvent)
+	log.Fatal(gateway.ListenAndServe(":80", webhooks.Handler(hook)))
+}
+
+func HandlePullRequest(payload interface{}, header webhooks.Header) {
+	pl := payload.(github.PullRequestPayload)
+	fmt.Printf("%+v", pl)
 }
