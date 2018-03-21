@@ -9,12 +9,6 @@ import (
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
-type serve struct {
-	hook             webhooks.Webhook
-	path             string
-	includePathCheck bool
-}
-
 func main() {
 	hook := github.New(&github.Config{Secret: "hogehoge"})
 	hook.RegisterEvents(HandlePullRequest, github.PullRequestEvent)
