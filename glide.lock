@@ -1,5 +1,5 @@
-hash: 4cafa5c74f84fe440ee369009a793f8495fefaa97c2fd79519efc03469269f9e
-updated: 2018-03-18T20:12:08.577640269+09:00
+hash: 743759034d5f703a8c64656b43681cd9d64e23b18628165c1d32efcfb61b628d
+updated: 2018-03-21T23:39:13.380909406+09:00
 imports:
 - name: github.com/aws/aws-lambda-go
   version: fafa7e49388b8991caf99308e80655ba91816b72
@@ -8,8 +8,12 @@ imports:
   - lambda
   - lambda/messages
   - lambdacontext
+- name: github.com/awslabs/aws-lambda-go-api-proxy
+  version: 5aaec6761420bbbd4b1f4cf9e2d6eff552413986
+  subpackages:
+  - handlerfunc
 - name: gopkg.in/go-playground/webhooks.v3
-  version: c271ec3e322dab2e93990e8c5287fe5d5d1209ba
+  version: 1b6492ce4500ef6d1d06e0cd42717bc88f527815
   subpackages:
   - github
 testImports: []
