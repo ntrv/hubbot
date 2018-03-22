@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -18,10 +19,12 @@ func main() {
 
 func HandlePullRequest(payload interface{}, header webhooks.Header) {
 	pl := payload.(github.PullRequestPayload)
-	fmt.Printf("%+v", pl)
+	j, _ := json.Marshal(pl)
+	fmt.Printf("%v\n", string(j))
 }
 
 func HandlePush(payload interface{}, header webhooks.Header) {
 	pl := payload.(github.PushPayload)
-	fmt.Printf("%+v", pl)
+	j, _ := json.Marshal(pl)
+	fmt.Printf("%v\n", string(j))
 }
