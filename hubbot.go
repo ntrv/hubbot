@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/apex/gateway"
@@ -18,15 +17,16 @@ func main() {
 	hook := github.New(&github.Config{Secret: "hogehoge"})
 	hook.RegisterEvents(chatwork.HandlePullRequest, github.PullRequestEvent)
 	hook.RegisterEvents(chatwork.HandlePush, github.PushEvent)
-	log.Fatal(ListenAndServe(webhooks.Handler(hook)))
+	lambda.Start(handleHubbot(webhooks.Handler(hook)))
 }
 
-func ListenAndServe(h http.Handler) error {
+type lambdaHandleFunc func(context.Context, events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
+
+func handleHubbot(h http.Handler) lambdaHandleFunc {
 	if h == nil {
 		h = http.DefaultServeMux
 	}
-
-	lambda.Start(func(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	return func(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 		r, err := gateway.NewRequest(ctx, req)
 		if err != nil {
 			fmt.Printf("%v\n", req)
@@ -45,7 +45,5 @@ func ListenAndServe(h http.Handler) error {
 			}, nil
 		}
 		return resp, nil
-	})
-
-	return nil
+	}
 }
