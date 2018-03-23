@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,14 +9,15 @@ import (
 	"github.com/apex/gateway"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/ntrv/hubbot/chatwork"
 	"gopkg.in/go-playground/webhooks.v3"
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func main() {
 	hook := github.New(&github.Config{Secret: "hogehoge"})
-	hook.RegisterEvents(HandlePullRequest, github.PullRequestEvent)
-	hook.RegisterEvents(HandlePush, github.PushEvent)
+	hook.RegisterEvents(chatwork.HandlePullRequest, github.PullRequestEvent)
+	hook.RegisterEvents(chatwork.HandlePush, github.PushEvent)
 	log.Fatal(ListenAndServe(":80", webhooks.Handler(hook)))
 }
 
@@ -48,16 +48,4 @@ func ListenAndServe(addr string, h http.Handler) error {
 	})
 
 	return nil
-}
-
-func HandlePullRequest(payload interface{}, header webhooks.Header) {
-	pl := payload.(github.PullRequestPayload)
-	j, _ := json.Marshal(pl)
-	fmt.Printf("%v\n", string(j))
-}
-
-func HandlePush(payload interface{}, header webhooks.Header) {
-	pl := payload.(github.PushPayload)
-	j, _ := json.Marshal(pl)
-	fmt.Printf("%v\n", string(j))
 }
