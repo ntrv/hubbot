@@ -18,10 +18,10 @@ func main() {
 	hook := github.New(&github.Config{Secret: "hogehoge"})
 	hook.RegisterEvents(chatwork.HandlePullRequest, github.PullRequestEvent)
 	hook.RegisterEvents(chatwork.HandlePush, github.PushEvent)
-	log.Fatal(ListenAndServe(":80", webhooks.Handler(hook)))
+	log.Fatal(ListenAndServe(webhooks.Handler(hook)))
 }
 
-func ListenAndServe(addr string, h http.Handler) error {
+func ListenAndServe(h http.Handler) error {
 	if h == nil {
 		h = http.DefaultServeMux
 	}
