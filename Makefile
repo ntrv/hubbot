@@ -6,7 +6,7 @@ default: archive
 
 .PHONY: build
 build:
-	go build -o ${BINPATH}/${APPNAME} .
+	GOOS=linux GOARCH=amd64 go build -o ${BINPATH}/${APPNAME} .
 
 .PHONY: archive
 archive: build
