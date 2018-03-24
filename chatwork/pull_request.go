@@ -3,13 +3,15 @@ package chatwork
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
-	"gopkg.in/go-playground/webhooks.v3"
-	"gopkg.in/go-playground/webhooks.v3/github"
+	"github.com/ntrv/webhooks"
+	"github.com/ntrv/webhooks/github"
 )
 
-func (c client) HandlePullRequest(payload interface{}, header webhooks.Header) {
+func (c client) HandlePullRequest(payload interface{}, header webhooks.Header, w *http.ResponseWriter) {
 	pl := payload.(github.PullRequestPayload)
 	j, _ := json.Marshal(pl)
 	fmt.Printf("%v\n", string(j))
+	http.Error(*w, "Status OK", http.StatusOK)
 }

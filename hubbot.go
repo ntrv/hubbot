@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/ntrv/hubbot/chatwork"
-	"gopkg.in/go-playground/webhooks.v3"
-	"gopkg.in/go-playground/webhooks.v3/github"
+	"github.com/ntrv/webhooks"
+	"github.com/ntrv/webhooks/github"
 )
 
 func main() {
