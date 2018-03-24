@@ -12,10 +12,6 @@ imports:
   - lambdacontext
 - name: github.com/griffin-stewie/go-chatwork
   version: a03aef7b22a62a2b0c7f2d5c409db523b748be48
-- name: github.com/ntrv/webhooks
-  version: 640b8c79a5aca680c737397bd6bdc1caee67f582
-  subpackages:
-  - github
 - name: github.com/pkg/errors
   version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
 testImports: []
