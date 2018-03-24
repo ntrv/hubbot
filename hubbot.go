@@ -9,7 +9,8 @@ import (
 
 func main() {
 	hook := github.New(&github.Config{Secret: "hogehoge"})
-	hook.RegisterEvents(chatwork.HandlePullRequest, github.PullRequestEvent)
-	hook.RegisterEvents(chatwork.HandlePush, github.PushEvent)
+	cw := chatwork.New(&chatwork.Config{ApiKey: "hogehoge"})
+	hook.RegisterEvents(cw.HandlePullRequest, github.PullRequestEvent)
+	hook.RegisterEvents(cw.HandlePush, github.PushEvent)
 	lambda.Start(handleHubbot(webhooks.Handler(hook)))
 }

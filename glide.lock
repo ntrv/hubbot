@@ -1,5 +1,5 @@
-hash: 7cabeca3bf078f7694b276b4a7c8a118a4f0ed1733620c65057937842e013c6e
-updated: 2018-03-24T04:58:30.206067976+09:00
+hash: fa12c9c86f9c0dbf948be8dc44494f115d9ae633483c48d0fb1ffd00162b96bd
+updated: 2018-03-24T20:43:41.28599243+09:00
 imports:
 - name: github.com/apex/gateway
   version: 94cc84b10787c61dbfbe8dd549cbc5c5dc685d1f
@@ -10,6 +10,8 @@ imports:
   - lambda
   - lambda/messages
   - lambdacontext
+- name: github.com/griffin-stewie/go-chatwork
+  version: a03aef7b22a62a2b0c7f2d5c409db523b748be48
 - name: github.com/pkg/errors
   version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
 - name: gopkg.in/go-playground/webhooks.v3

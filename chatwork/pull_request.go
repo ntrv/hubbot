@@ -8,7 +8,7 @@ import (
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
-func HandlePullRequest(payload interface{}, header webhooks.Header) {
+func (c client) HandlePullRequest(payload interface{}, header webhooks.Header) {
 	pl := payload.(github.PullRequestPayload)
 	j, _ := json.Marshal(pl)
 	fmt.Printf("%v\n", string(j))

@@ -11,3 +11,4 @@ import:
   subpackages:
   - lambda
   - events
+- package: github.com/griffin-stewie/go-chatwork
