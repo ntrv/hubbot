@@ -36,7 +36,7 @@ func (hook Webhook) ParsePayloadHandler(c echo.Context) error {
 		return echo.NewHTTPError(
 			http.StatusMethodNotAllowed,
 			fmt.Sprintf(
-				"405 Method not allowed, attempt made using Method: %s",
+				"Attempt made using following method is not allowed: %s",
 				c.Request().Method,
 			),
 		)
