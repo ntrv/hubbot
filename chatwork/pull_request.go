@@ -2,7 +2,6 @@ package chatwork
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo"
