@@ -1,5 +1,5 @@
-hash: 20fafb92d92c9e8113b70fd32ddc642dd545cb35e5d487a4a21fa2e4917b0f06
-updated: 2018-03-30T19:11:48.018079543+09:00
+hash: 7f7acfe025ede80f327d9590ae44fb1bd44161d528d314dc66eb52c5243c6670
+updated: 2018-05-04T15:48:58.770005851+09:00
 imports:
 - name: github.com/apex/gateway
   version: 94cc84b10787c61dbfbe8dd549cbc5c5dc685d1f
@@ -10,12 +10,42 @@ imports:
   - lambda
   - lambda/messages
   - lambdacontext
+- name: github.com/dgrijalva/jwt-go
+  version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
 - name: github.com/griffin-stewie/go-chatwork
   version: a03aef7b22a62a2b0c7f2d5c409db523b748be48
-- name: github.com/ntrv/webhooks
-  version: 267744ccadb9eb26c86b5e8c5469d20c7a2a2c40
+- name: github.com/labstack/echo
+  version: a5d81b8d4a627f3f49dcb3164ef2bb5239682227
   subpackages:
-  - github
+  - middleware
+- name: github.com/labstack/gommon
+  version: 3bc2d333a4c30531c47051369043bcabd62ff4c0
+  subpackages:
+  - bytes
+  - color
+  - log
+  - random
+- name: github.com/mattn/go-colorable
+  version: efa589957cd060542a26d2dd7832fd6a6c6c3ade
+- name: github.com/mattn/go-isatty
+  version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
 - name: github.com/pkg/errors
   version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
+- name: github.com/valyala/bytebufferpool
+  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
+- name: github.com/valyala/fasttemplate
+  version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
+- name: golang.org/x/crypto
+  version: 88942b9c40a4c9d203b82b3731787b672d6e809b
+  subpackages:
+  - acme
+  - acme/autocert
+- name: golang.org/x/sys
+  version: 7a6e5648d140666db5d920909e082ca00a87ba2c
+  subpackages:
+  - unix
+- name: gopkg.in/go-playground/webhooks.v3
+  version: 5580947e3ec83427ef5f6f2392eddca8dde5d99a
+  subpackages:
+  - github
 testImports: []
