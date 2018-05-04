@@ -1,16 +1,30 @@
 package main
 
 import (
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/ntrv/hubbot/chatwork"
-	"github.com/ntrv/webhooks"
-	"github.com/ntrv/webhooks/github"
+	"github.com/ntrv/hubbot/github"
+	gh "gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func main() {
-	hook := github.New(&github.Config{Secret: "hogehoge"})
+	hook := github.NewHook()
 	cw := chatwork.New(&chatwork.Config{ApiKey: "hogehoge"})
-	hook.RegisterEvents(cw.HandlePullRequest, github.PullRequestEvent)
-	hook.RegisterEvents(cw.HandlePush, github.PushEvent)
-	lambda.Start(handleHubbot(webhooks.Handler(hook)))
+
+	hook.RegisterEvents(cw.HandlePush, gh.PushEvent)
+	hook.RegisterEvents(cw.HandlePullRequest, gh.HandlePullRequest)
+
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+	e.Use(
+		github.VerifyMiddleware(
+			&github.VerifyConfig{secret: "hogehoge"},
+		),
+	)
+
+	e.POST("/", hook.ParsePayloadHandler)
+
+	e.Logger.Fatal(e.Start(":1234"))
 }
