@@ -1,11 +1,14 @@
 package main
 
 import (
+	"net/http"
+	"time"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/ntrv/hubbot/chatwork"
-	gh "gopkg.in/go-playground/webhooks.v3/github"
 	"github.com/ntrv/hubbot/github"
+	gh "gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func main() {
@@ -26,5 +29,11 @@ func main() {
 
 	e.POST("/", hook.ParsePayloadHandler)
 
-	e.Logger.Fatal(e.Start(":1234"))
+	s := &http.Server{
+		Addr:         ":1234",
+		ReadTimeout:  1 * time.Minute,
+		WriteTimeout: 1 * time.Minute,
+	}
+
+	e.Logger.Fatal(e.StartServer(s))
 }
