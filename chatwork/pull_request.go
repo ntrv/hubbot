@@ -2,16 +2,27 @@ package chatwork
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"github.com/ntrv/webhooks"
-	"github.com/ntrv/webhooks/github"
+	"github.com/labstack/echo"
+	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
-func (c client) HandlePullRequest(payload interface{}, header webhooks.Header, w http.ResponseWriter) {
-	pl := payload.(github.PullRequestPayload)
-	j, _ := json.Marshal(pl)
-	fmt.Printf("%v\n", string(j))
-	http.Error(w, "Status OK", http.StatusOK)
+func (cw client) HandlePullRequest(payload interface{}, c echo.Context) error {
+	pl, ok := payload.(github.PullRequestPayload)
+	if !ok {
+		return echo.NewHTTPError(
+			http.StatusInternalServerError,
+			"Failed to parse PRPayload",
+		)
+	}
+
+	j, err := json.Marshal(pl)
+	if err != nil {
+		return echo.NewHTTPError(
+			http.StatusBadRequest,
+			"PRPayload is not JSON format",
+		)
+	}
+	return c.JSON(http.StatusOK, j)
 }
