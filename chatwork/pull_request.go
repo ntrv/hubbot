@@ -8,7 +8,7 @@ import (
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
-func (cw client) HandlePullRequest(payload interface{}, c echo.Context) error {
+func (cl client) HandlePullRequest(payload interface{}, c echo.Context) error {
 	pl, ok := payload.(github.PullRequestPayload)
 	if !ok {
 		return echo.NewHTTPError(
