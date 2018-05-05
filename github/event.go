@@ -30,7 +30,7 @@ func (hook Webhook) RegisterEvents(fn ProcessPayloadFunc, events ...gh.Event) {
 }
 
 func (hook Webhook) ParsePayloadHandler(c echo.Context) error {
-	if c.Request().Method != "POST" {
+	if c.Request().Method != echo.POST {
 		return echo.NewHTTPError(
 			http.StatusMethodNotAllowed,
 			fmt.Sprintf(
