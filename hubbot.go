@@ -29,7 +29,7 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(
 		github.VerifyMiddleware(
-			github.VerifyConfig{Secret: "hogehoge"},
+			github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
 		),
 	)
 

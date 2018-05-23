@@ -1,6 +1,7 @@
 use_cw-test(){
   export API_KEY=
   export ROOM_ID=
+  export X_HUB_SECRET=
 }
 
 use cw-test
