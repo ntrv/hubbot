@@ -19,4 +19,4 @@ hubbot
 .envrc
 
 # go-assets
-chatwork/assets.go
+assets.go
