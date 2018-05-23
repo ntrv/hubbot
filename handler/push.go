@@ -12,7 +12,6 @@ import (
 )
 
 func genPushMsg(pl github.PushPayload) (string, error) {
-
 	f, err := Assets.Open("/push.tmpl")
 	if err != nil {
 		return "", err
@@ -29,7 +28,6 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 	}
 
 	msg := &bytes.Buffer{}
-
 	if err := tpl.Execute(msg, pl); err != nil {
 		return "", err
 	}
@@ -39,7 +37,6 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 
 func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
 	return func(payload interface{}, c echo.Context) error {
-
 		pl, ok := payload.(github.PushPayload)
 		if !ok {
 			return echo.NewHTTPError(
