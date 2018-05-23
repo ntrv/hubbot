@@ -1,19 +1,12 @@
 hash: 7f7acfe025ede80f327d9590ae44fb1bd44161d528d314dc66eb52c5243c6670
-updated: 2018-05-04T15:48:58.770005851+09:00
+updated: 2018-05-24T00:41:15.235829927+09:00
 imports:
-- name: github.com/apex/gateway
-  version: 94cc84b10787c61dbfbe8dd549cbc5c5dc685d1f
-- name: github.com/aws/aws-lambda-go
-  version: fafa7e49388b8991caf99308e80655ba91816b72
-  subpackages:
-  - events
-  - lambda
-  - lambda/messages
-  - lambdacontext
 - name: github.com/dgrijalva/jwt-go
   version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
 - name: github.com/griffin-stewie/go-chatwork
   version: a03aef7b22a62a2b0c7f2d5c409db523b748be48
+- name: github.com/jessevdk/go-assets
+  version: 4f4301a06e153ff90e17793577ab6bf79f8dc5c5
 - name: github.com/labstack/echo
   version: a5d81b8d4a627f3f49dcb3164ef2bb5239682227
   subpackages:
@@ -29,8 +22,6 @@ imports:
   version: efa589957cd060542a26d2dd7832fd6a6c6c3ade
 - name: github.com/mattn/go-isatty
   version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
-- name: github.com/pkg/errors
-  version: 248dadf4e9068a0b3e79f02ed0a610d935de5302
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasttemplate
@@ -45,7 +36,19 @@ imports:
   subpackages:
   - unix
 - name: gopkg.in/go-playground/webhooks.v3
-  version: 5580947e3ec83427ef5f6f2392eddca8dde5d99a
+  version: be944ed461fc75c52f0f149acfa011f8da721f6c
   subpackages:
   - github
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
