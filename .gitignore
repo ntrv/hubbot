@@ -17,3 +17,6 @@ bin/*
 !.gitkeep
 hubbot
 .envrc
+
+# go-assets
+chatwork/assets.go
