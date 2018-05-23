@@ -9,3 +9,8 @@ import:
   - github
 - package: github.com/jessevdk/go-assets
 - package: github.com/jessevdk/go-assets-builder
+testImport:
+  - package: github.com/stretchr/testify/assert
+    version: ^1.2.1
+    subpackages:
+    - github
