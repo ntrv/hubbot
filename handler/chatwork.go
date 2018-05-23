@@ -1,10 +1,10 @@
-package chatwork
+package handler
 
 import (
 	"github.com/labstack/echo"
 )
 
-//go:generate go-assets-builder -p chatwork -s="/template" -o assets.go template
+//go:generate go-assets-builder -p handler -s="/template" -o assets.go template
 
 type client struct{}
 
