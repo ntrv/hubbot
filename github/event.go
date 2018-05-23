@@ -52,7 +52,7 @@ func (hook Webhook) ParsePayloadHandler(c echo.Context) error {
 	fn, ok := hook.eventFuncs[hook.eventName]
 	if !ok {
 		return echo.NewHTTPError(
-			http.StatusBadRequest,
+			http.StatusNotImplemented,
 			fmt.Sprintf(
 				"Webhook Event %s not registered, it is recommended to setup only events in github that will be registered in the webhook to avoid unnecessary traffic and reduce potential attack vectors.",
 				event,
