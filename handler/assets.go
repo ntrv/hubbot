@@ -10,14 +10,14 @@ var _Assetsdaa4d3d0a9722b3ae57f515a4935214b03826800 = "[info][title]Push event a
 
 // Assets returns go-assets FileSystem
 var Assets = assets.NewFileSystem(map[string][]string{"/": []string{"push.tmpl"}}, map[string]*assets.File{
-	"/push.tmpl": &assets.File{
-		Path:     "/push.tmpl",
-		FileMode: 0x1a4,
-		Mtime:    time.Unix(1527095132, 1527095132000000000),
-		Data:     []byte(_Assetsdaa4d3d0a9722b3ae57f515a4935214b03826800),
-	}, "/": &assets.File{
+	"/": &assets.File{
 		Path:     "/",
 		FileMode: 0x800001ed,
 		Mtime:    time.Unix(1527095132, 1527095132000000000),
 		Data:     nil,
+	}, "/push.tmpl": &assets.File{
+		Path:     "/push.tmpl",
+		FileMode: 0x1a4,
+		Mtime:    time.Unix(1527095132, 1527095132000000000),
+		Data:     []byte(_Assetsdaa4d3d0a9722b3ae57f515a4935214b03826800),
 	}}, "")
