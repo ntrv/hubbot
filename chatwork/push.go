@@ -12,9 +12,17 @@ import (
 
 func genPushMsg(pl github.PushPayload) (string, error) {
 
+	f, err := Assets.Open("/push.tmpl")
+	if err != nil {
+		return "", err
+	}
 
+	buf := bytes.Buffer{}
+	if _, err := buf.ReadFrom(f); err != nil {
+		return "", err
+	}
 
-	tpl, err := template.New("Push").Parse(strings.Replace(templateText, "\t", "", -1))
+	tpl, err := template.New("Push").Parse(strings.Replace(buf.String(), "\t", "", -1))
 	if err != nil {
 		return "", err
 	}
