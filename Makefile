@@ -13,6 +13,7 @@ build:
 	go build -o ${BINPATH}/${APPNAME}
 
 .PHONY: run
+run:
 	go run hubbot.go
 
 .PHONY: archive
