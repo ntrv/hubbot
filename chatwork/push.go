@@ -7,6 +7,7 @@ import (
 	"text/template"
 
 	"github.com/labstack/echo"
+	gh "github.com/ntrv/hubbot/github"
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
@@ -36,32 +37,25 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 	return msg.String(), nil
 }
 
-func (cl client) HandlePush(payload interface{}, c echo.Context) error {
+func (cl client) HandlePush(f PostProcessFunc) gh.ProcessPayloadFunc {
+	return func(payload interface{}, c echo.Context) error {
 
-	var res []byte
+		pl, ok := payload.(github.PushPayload)
+		if !ok {
+			return echo.NewHTTPError(
+				http.StatusInternalServerError,
+				"Failed to parse PushPayload",
+			)
+		}
 
-	pl, ok := payload.(github.PushPayload)
-	if !ok {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			"Failed to parse PushPayload",
-		)
+		msg, err := genPushMsg(pl)
+		if err != nil {
+			return echo.NewHTTPError(
+				http.StatusInternalServerError,
+				err.Error(),
+			)
+		}
+
+		return f(msg, c)
 	}
-
-	msg, err := genPushMsg(pl)
-	if err != nil {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			err.Error(),
-		)
-	}
-
-	if res, err = cl.cw.PostRoomMessage(cl.roomId, msg); err != nil {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			err.Error(),
-		)
-	}
-
-	return c.String(http.StatusOK, string(res))
 }

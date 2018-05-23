@@ -1,24 +1,15 @@
 package chatwork
 
 import (
-	cw "github.com/griffin-stewie/go-chatwork"
+	"github.com/labstack/echo"
 )
 
 //go:generate go-assets-builder -p chatwork -s="/template" -o assets.go template
 
-type client struct {
-	cw *cw.Client
-	roomId string
-}
+type client struct{}
 
-type Config struct {
-	ApiKey string
-	RoomId string
-}
+type PostProcessFunc func(msg string, c echo.Context) error
 
-func New(config *Config) *client {
-	return &client{
-		cw.NewClient(config.ApiKey),
-		config.RoomId,
-	}
+func New() *client {
+	return &client{}
 }
