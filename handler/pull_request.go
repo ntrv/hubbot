@@ -9,7 +9,7 @@ import (
 	gh "github.com/ntrv/hubbot/github"
 )
 
-func (cl client) HandlePullRequest(f PostProcessFunc) gh.ProcessPayloadFunc {
+func PullRequest(f PostProcessFunc) gh.ProcessPayloadFunc {
 	return func(payload interface{}, c echo.Context) error {
 		pl, ok := payload.(github.PullRequestPayload)
 		if !ok {

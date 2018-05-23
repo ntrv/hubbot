@@ -40,10 +40,9 @@ func main() {
 	)
 
 	hook := github.NewHook()
-	h := handler.New()
 
-	hook.RegisterEvents(h.HandlePush(PrintActionFunc), gh.PushEvent)
-	hook.RegisterEvents(h.HandlePullRequest(PrintActionFunc), gh.PullRequestEvent)
+	hook.RegisterEvents(handler.Push(PrintActionFunc), gh.PushEvent)
+	hook.RegisterEvents(handler.PullRequest(PrintActionFunc), gh.PullRequestEvent)
 
 	e.POST("/", hook.ParsePayloadHandler)
 

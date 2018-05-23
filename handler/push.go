@@ -37,7 +37,7 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 	return msg.String(), nil
 }
 
-func (cl client) HandlePush(f PostProcessFunc) gh.ProcessPayloadFunc {
+func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
 	return func(payload interface{}, c echo.Context) error {
 
 		pl, ok := payload.(github.PushPayload)
