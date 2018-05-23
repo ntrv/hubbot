@@ -1,5 +1,5 @@
-hash: 7f7acfe025ede80f327d9590ae44fb1bd44161d528d314dc66eb52c5243c6670
-updated: 2018-05-24T00:41:15.235829927+09:00
+hash: fdee68947ad3f40dc6fecb0252fd3d7ecee5bb90ce77ed994d43d8433bc53d56
+updated: 2018-05-24T00:46:12.643420339+09:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
@@ -7,6 +7,8 @@ imports:
   version: a03aef7b22a62a2b0c7f2d5c409db523b748be48
 - name: github.com/jessevdk/go-assets
   version: 4f4301a06e153ff90e17793577ab6bf79f8dc5c5
+- name: github.com/jessevdk/go-assets-builder
+  version: b8483521738fd2198ecfc378067a4e8a6079f8e5
 - name: github.com/labstack/echo
   version: a5d81b8d4a627f3f49dcb3164ef2bb5239682227
   subpackages:

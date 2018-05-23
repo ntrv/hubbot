@@ -7,3 +7,5 @@ import:
   version: ^3.11.0
   subpackages:
   - github
+- package: github.com/jessevdk/go-assets
+- package: github.com/jessevdk/go-assets-builder
