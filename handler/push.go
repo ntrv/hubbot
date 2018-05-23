@@ -1,4 +1,4 @@
-package chatwork
+package handler
 
 import (
 	"bytes"
@@ -7,11 +7,11 @@ import (
 	"text/template"
 
 	"github.com/labstack/echo"
+	gh "github.com/ntrv/hubbot/github"
 	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func genPushMsg(pl github.PushPayload) (string, error) {
-
 	f, err := Assets.Open("/push.tmpl")
 	if err != nil {
 		return "", err
@@ -28,7 +28,6 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 	}
 
 	msg := &bytes.Buffer{}
-
 	if err := tpl.Execute(msg, pl); err != nil {
 		return "", err
 	}
@@ -36,32 +35,24 @@ func genPushMsg(pl github.PushPayload) (string, error) {
 	return msg.String(), nil
 }
 
-func (cl client) HandlePush(payload interface{}, c echo.Context) error {
+func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
+	return func(payload interface{}, c echo.Context) error {
+		pl, ok := payload.(github.PushPayload)
+		if !ok {
+			return echo.NewHTTPError(
+				http.StatusInternalServerError,
+				"Failed to parse PushPayload",
+			)
+		}
 
-	var res []byte
+		msg, err := genPushMsg(pl)
+		if err != nil {
+			return echo.NewHTTPError(
+				http.StatusInternalServerError,
+				err.Error(),
+			)
+		}
 
-	pl, ok := payload.(github.PushPayload)
-	if !ok {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			"Failed to parse PushPayload",
-		)
+		return f(msg, c)
 	}
-
-	msg, err := genPushMsg(pl)
-	if err != nil {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			err.Error(),
-		)
-	}
-
-	if res, err = cl.cw.PostRoomMessage(cl.roomId, msg); err != nil {
-		return echo.NewHTTPError(
-			http.StatusInternalServerError,
-			err.Error(),
-		)
-	}
-
-	return c.String(http.StatusOK, string(res))
 }

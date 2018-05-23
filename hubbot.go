@@ -7,23 +7,12 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/ntrv/hubbot/chatwork"
 	"github.com/ntrv/hubbot/github"
+	"github.com/ntrv/hubbot/handler"
 	gh "gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func main() {
-	hook := github.NewHook()
-	cw := chatwork.New(
-		&chatwork.Config{
-			ApiKey: os.Getenv("API_KEY"),
-			RoomId: os.Getenv("ROOM_ID"),
-		},
-	)
-
-	hook.RegisterEvents(cw.HandlePush, gh.PushEvent)
-	hook.RegisterEvents(cw.HandlePullRequest, gh.PullRequestEvent)
-
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -31,6 +20,17 @@ func main() {
 		github.VerifyMiddleware(
 			github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
 		),
+	)
+
+	hook := github.NewHook()
+
+	hook.RegisterEvents(
+		handler.Push(handler.PrintPostProcess),
+		gh.PushEvent,
+	)
+	hook.RegisterEvents(
+		handler.PullRequest(handler.PrintPostProcess),
+		gh.PullRequestEvent,
 	)
 
 	e.POST("/", hook.ParsePayloadHandler)

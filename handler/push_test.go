@@ -1,4 +1,4 @@
-package chatwork
+package handler
 
 import (
 	"encoding/json"
