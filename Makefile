@@ -4,12 +4,16 @@ APPNAME = hubbot
 .PHONY: default
 default: build
 
+.PHONY: generate
+generate:
+	go generate ./...
+
 .PHONY: build-linux
-build-linux:
+build-linux: generate
 	GOOS=linux GOARCH=amd64 go build -ldflags '-d -s -w' -o ${BINPATH}/${APPNAME}_linux .
 
 .PHONY: build
-build:
+build: generate
 	go build -o ${BINPATH}/${APPNAME}
 
 .PHONY: run
@@ -21,7 +25,7 @@ archive: build-linux
 	zip -r ${BINPATH}/${APPNAME}_linux.zip ${BINPATH}/${APPNAME}_linux
 
 .PHONY: test
-test:
+test: generate
 	go test -v ./...
 
 .PHONY: clean

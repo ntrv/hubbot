@@ -12,39 +12,17 @@ import (
 
 func genPushMsg(pl github.PushPayload) (string, error) {
 
-	templateText := `[info][title]Push event at {{.Repository.Name}}[/title]URL: {{.Repository.URL}}
-		Ref: {{.Ref}}
-		CompareURL: {{.Compare}}
-		GitHub-User: {{.Pusher.Name}}
-		{{- range $_, $c := .Commits -}}
-			[info][title]{{- $c.Message -}}[/title]URL: {{ $c.URL -}}
-			[hr]
-			{{- if ne (len $c.Added) 0 -}}
-				Added:[code]
-				{{- range $_, $a := $c.Added -}}
-					{{ $a }}
-				{{- end -}}
-				[/code]
-			{{- end -}}
-			{{- if ne (len $c.Modified) 0 -}}
-				Modified:[code]
-				{{- range $_, $m := $c.Modified -}}
-					{{ $m }}
-				{{- end -}}
-				[/code]
-			{{- end }}
-			{{- if ne (len $c.Removed) 0 -}}
-				Removed:[code]
-				{{- range $_, $r := $c.Removed -}}
-					{{ $r }}
-				{{- end -}}
-				[/code]
-			{{- end -}}
-			[/info] 
-		{{- end -}}
-		[/info]`
+	f, err := Assets.Open("/push.tmpl")
+	if err != nil {
+		return "", err
+	}
 
-	tpl, err := template.New("Push").Parse(strings.Replace(templateText, "\t", "", -1))
+	buf := bytes.Buffer{}
+	if _, err := buf.ReadFrom(f); err != nil {
+		return "", err
+	}
+
+	tpl, err := template.New("Push").Parse(strings.Replace(buf.String(), "\t", "", -1))
 	if err != nil {
 		return "", err
 	}
