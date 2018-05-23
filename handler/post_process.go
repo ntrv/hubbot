@@ -10,7 +10,7 @@ import (
 
 type PostProcessFunc func(msg string, c echo.Context) error
 
-func SendChatworkPostAction(msg string, c echo.Context) error {
+func SendChatworkPostProcess(msg string, c echo.Context) error {
 	cw := chatwork.NewClient(os.Getenv("API_KEY"))
 	res, err := cw.PostRoomMessage(os.Getenv("ROOM_ID"), msg)
 	if err != nil {
@@ -22,6 +22,6 @@ func SendChatworkPostAction(msg string, c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-func PrintPostAction(msg string, c echo.Context) error {
+func PrintPostProcess(msg string, c echo.Context) error {
 	return c.String(http.StatusOK, msg)
 }
