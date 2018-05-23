@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/labstack/echo"
@@ -13,7 +14,12 @@ import (
 
 func main() {
 	hook := github.NewHook()
-	cw := chatwork.New(&chatwork.Config{ApiKey: "hogehoge"})
+	cw := chatwork.New(
+		&chatwork.Config{
+			ApiKey: os.Getenv("API_KEY"),
+			RoomId: os.Getenv("ROOM_ID"),
+		},
+	)
 
 	hook.RegisterEvents(cw.HandlePush, gh.PushEvent)
 	hook.RegisterEvents(cw.HandlePullRequest, gh.PullRequestEvent)
