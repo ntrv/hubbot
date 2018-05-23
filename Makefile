@@ -25,7 +25,7 @@ archive: build-linux
 	zip -r ${BINPATH}/${APPNAME}_linux.zip ${BINPATH}/${APPNAME}_linux
 
 .PHONY: test
-test:
+test: generate
 	go test -v ./...
 
 .PHONY: clean
