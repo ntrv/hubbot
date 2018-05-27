@@ -39,7 +39,7 @@ func main() {
 	e.POST("/", hook.ParsePayloadHandler)
 
 	s := &http.Server{
-		Addr:         ":1234",
+		Addr:         ":"+os.Getenv("PORT"),
 		ReadTimeout:  1 * time.Minute,
 		WriteTimeout: 1 * time.Minute,
 	}

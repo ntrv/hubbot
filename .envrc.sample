@@ -1,4 +1,5 @@
 use_cw-test(){
+  export PORT=80
   export API_KEY=
   export ROOM_ID=
   export X_HUB_SECRET=
