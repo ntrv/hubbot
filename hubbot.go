@@ -28,11 +28,11 @@ func main() {
 	hook := github.NewHook()
 
 	hook.RegisterEvents(
-		handler.Push(handler.PrintPostProcess),
+		handler.Push(handler.SendChatworkPostProcess),
 		gh.PushEvent,
 	)
 	hook.RegisterEvents(
-		handler.PullRequest(handler.PrintPostProcess),
+		handler.PullRequest(handler.SendChatworkPostProcess),
 		gh.PullRequestEvent,
 	)
 
