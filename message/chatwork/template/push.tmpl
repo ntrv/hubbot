@@ -1,7 +1,7 @@
 [info][title]Push event at {{.Repository.Name}}[/title]URL: {{.Repository.URL}}
-  Ref: {{.Ref}}
-  CompareURL: {{.Compare}}
-  GitHub-User: {{.Pusher.Name}}
+Ref: {{.Ref}}
+CompareURL: {{.Compare}}
+GitHub-User: {{.Pusher.Name}}
   {{- range $_, $c := .Commits -}}
     [info][title]{{- $c.Message -}}[/title]URL: {{ $c.URL -}}
     [hr]
