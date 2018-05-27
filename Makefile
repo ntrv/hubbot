@@ -28,6 +28,10 @@ archive: build-linux
 test: generate
 	go test -v ./...
 
+.PHONY: integration-test
+integration-test: 
+	curl -XPOST -H "Content-Type: application/json" -H 'X-GitHub-Event: push' http://localhost:1234 -d @example/push.json
+
 .PHONY: clean
 clean:
 	rm -f ${BINPATH}/*
