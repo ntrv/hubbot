@@ -16,11 +16,14 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(
-		github.VerifyMiddleware(
-			github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
-		),
-	)
+
+	if os.Getenv("X_HUB_SECRET") != "" {
+		e.Use(
+			github.VerifyMiddleware(
+				github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
+			),
+		)
+	}
 
 	hook := github.NewHook()
 
