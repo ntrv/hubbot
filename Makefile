@@ -35,3 +35,7 @@ integration-test:
 .PHONY: clean
 clean:
 	rm -f ${BINPATH}/*
+
+.PHONY: deploy
+deploy:
+	git push heroku heroku/master:master --force
