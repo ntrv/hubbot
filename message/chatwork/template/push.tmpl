@@ -3,7 +3,8 @@ Ref: {{.Ref}}
 CompareURL: {{.Compare}}
 GitHub-User: {{.Pusher.Name}}
   {{- range $_, $c := .Commits -}}
-    [info][title]{{- $c.Message -}}[/title]URL: {{ $c.URL -}}
+    [info][title]{{- $c.Message -}}[/title]URL: {{ $c.URL }}
+    CommitId: {{ $c.ID -}}
     [hr]
     {{- if ne (len $c.Added) 0 -}}
       Added:[code]
