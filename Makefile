@@ -37,5 +37,5 @@ clean:
 	rm -f ${BINPATH}/*
 
 .PHONY: deploy
-deploy:
+deploy: generate
 	git push heroku heroku/master:master --force
