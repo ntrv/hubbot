@@ -25,10 +25,13 @@
         "email": "baxterthehacker@users.noreply.github.com",
         "username": "baxterthehacker"
       },
-      "added": [],
+      "added": [
+        ".gitignore"
+      ],
       "removed": [],
       "modified": [
-        "README.md"
+        "README.md",
+        "LICENSE"
       ]
     }
   ],
@@ -49,10 +52,13 @@
       "email": "baxterthehacker@users.noreply.github.com",
       "username": "baxterthehacker"
     },
-    "added": [],
+    "added": [
+      ".gitignore"
+    ],
     "removed": [],
     "modified": [
-      "README.md"
+      "README.md",
+      "LICENSE"
     ]
   },
   "repository": {

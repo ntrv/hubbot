@@ -8,21 +8,21 @@ GitHub-User: {{.Pusher.Name}}
     {{- if ne (len $c.Added) 0 -}}
       Added:[code]
       {{- range $_, $a := $c.Added -}}
-        {{ $a }}
+{{ $a }}
       {{- end -}}
       [/code]
     {{- end -}}
     {{- if ne (len $c.Modified) 0 -}}
       Modified:[code]
-      {{- range $_, $m := $c.Modified -}}
-        {{ $m }}
+      {{- range $_, $m := $c.Modified }}
+{{ $m }}
       {{- end -}}
       [/code]
     {{- end }}
     {{- if ne (len $c.Removed) 0 -}}
       Removed:[code]
-      {{- range $_, $r := $c.Removed -}}
-        {{ $r }}
+      {{- range $_, $r := $c.Removed }}
+{{ $r }}
       {{- end -}}
       [/code]
     {{- end -}}
