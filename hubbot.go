@@ -27,14 +27,25 @@ func main() {
 
 	hook := github.NewHook()
 
-	hook.RegisterEvents(
-		handler.Push(handler.SendChatworkPostProcess),
-		gh.PushEvent,
-	)
-	hook.RegisterEvents(
-		handler.PullRequest(handler.SendChatworkPostProcess),
-		gh.PullRequestEvent,
-	)
+	if os.Getenv("ROOM_ID") != "" && os.Getenv("API_KEY") != "" {
+		hook.RegisterEvents(
+			handler.Push(handler.SendChatworkPostProcess),
+			gh.PushEvent,
+		)
+		hook.RegisterEvents(
+			handler.PullRequest(handler.SendChatworkPostProcess),
+			gh.PullRequestEvent,
+		)
+	}else{
+		hook.RegisterEvents(
+			handler.Push(handler.PrintPostProcess),
+			gh.PushEvent,
+		)
+		hook.RegisterEvents(
+			handler.PullRequest(handler.PrintPostProcess),
+			gh.PullRequestEvent,
+		)
+	}
 
 	e.POST("/", hook.ParsePayloadHandler)
 
