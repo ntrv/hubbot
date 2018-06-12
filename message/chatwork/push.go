@@ -31,7 +31,7 @@ func PushMsg(pl github.PushPayload) (string, error) {
 	}
 
 	if len(pl.Commits) == 0 {
-		return nil, errors.New("Empty Commit detected. Skip.")
+		return "", errors.New("Empty Commit detected. Skip.")
 	}
 	return msg.String(), nil
 }
