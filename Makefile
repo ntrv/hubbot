@@ -38,4 +38,4 @@ clean:
 
 .PHONY: deploy
 deploy: generate
-	git push heroku heroku/master:master --force
+	git push heroku heroku/master:master --force-with-lease
