@@ -2,6 +2,7 @@ package chatwork
 
 import (
 	"bytes"
+	"errors"
 	"strings"
 	"text/template"
 
@@ -29,5 +30,8 @@ func PushMsg(pl github.PushPayload) (string, error) {
 		return "", err
 	}
 
+	if len(pl.Commits) == 0 {
+		return nil, errors.New("Empty Commit detected. Skip.")
+	}
 	return msg.String(), nil
 }
