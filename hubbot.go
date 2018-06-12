@@ -36,7 +36,7 @@ func main() {
 			handler.PullRequest(handler.SendChatworkPostProcess),
 			gh.PullRequestEvent,
 		)
-	}else{
+	} else {
 		hook.RegisterEvents(
 			handler.Push(handler.PrintPostProcess),
 			gh.PushEvent,
@@ -50,7 +50,7 @@ func main() {
 	e.POST("/", hook.ParsePayloadHandler)
 
 	s := &http.Server{
-		Addr:         ":"+os.Getenv("PORT"),
+		Addr:         ":" + os.Getenv("PORT"),
 		ReadTimeout:  1 * time.Minute,
 		WriteTimeout: 1 * time.Minute,
 	}
