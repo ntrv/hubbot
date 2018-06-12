@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"errors"
 
 	"github.com/labstack/echo"
 	gh "github.com/ntrv/hubbot/github"
@@ -16,6 +17,20 @@ func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
 			return echo.NewHTTPError(
 				http.StatusInternalServerError,
 				"Failed to parse PushPayload",
+			)
+		}
+
+		if pl.Deleted {
+			return echo.NewHTTPError(
+				http.StatusNotAcceptable,
+				errors.New("Detect delete branch action. Skip."),
+			)
+		}
+
+		if pl.Created && len(pl.Commits) == 0 {
+			return echo.NewHTTPError(
+				http.StatusNotAcceptable,
+				errors.New("Creating empty branch. Skip."),
 			)
 		}
 
