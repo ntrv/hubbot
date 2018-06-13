@@ -24,7 +24,7 @@ func SendChatworkPostProcess(msg string, c echo.Context) error {
 	}
 
 	// Cut off string before comma separator
-	res64data := res64[strings.IndexByte(res64, ',')+1:]
+	res64data := res64[strings.IndexByte(string(res64), ',')+1:]
 	res, err := base64.URLEncoding.DecodeString(string(res64data))
 	if err != nil {
 		log.Println("Failed to Decode Base64: ", err.Error())
