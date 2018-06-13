@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"net/http"
-	"os"
 	"encoding/base64"
 	"log"
+	"net/http"
+	"os"
 
 	chatwork "github.com/griffin-stewie/go-chatwork"
 	"github.com/labstack/echo"
@@ -27,7 +27,7 @@ func SendChatworkPostProcess(msg string, c echo.Context) error {
 		log.Println("Failed to Decode Base64: ", err.Error())
 		return c.JSON(http.StatusOK, res64)
 	}
-	return c.JSON(http.StatusOK,  res)
+	return c.JSON(http.StatusOK, res)
 }
 
 func PrintPostProcess(msg string, c echo.Context) error {
