@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	chatwork "github.com/griffin-stewie/go-chatwork"
 	"github.com/labstack/echo"
@@ -22,7 +23,9 @@ func SendChatworkPostProcess(msg string, c echo.Context) error {
 		)
 	}
 
-	res, err := base64.URLEncoding.DecodeString(string(res64))
+	// Cut off string before comma separator
+	res64data := res64[strings.IndexByte(res64, ',')+1:]
+	res, err := base64.URLEncoding.DecodeString(string(res64data))
 	if err != nil {
 		log.Println("Failed to Decode Base64: ", err.Error())
 		return c.JSON(http.StatusOK, res64)
