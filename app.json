@@ -1,0 +1,31 @@
+{
+  "name": "hubbot",
+  "description": "ChatBot which is hook an action at GitHub and post it (ex. Chatwork, Slack)",
+  "keywords": [
+    "Golang",
+    "GitHub",
+    "Bot"
+  ],
+  "repository": "https://github.com/ntrv/hubbot",
+  "env": {
+    "API_KEY": {
+      "description": "Chatwork API Key",
+      "value": ""
+    },
+    "PORT": {
+      "description": "Port for hubbot",
+      "value": "80"
+    },
+    "ROOM_ID": {
+      "description": "Chatwork RoomId to post",
+      "value": ""
+    },
+    "X_HUB_SECRET": {
+      "description": "GitHub secret token for generate x-hub-signature",
+      "generator": "secret"
+    }
+  },
+  "buildpacks": [
+    "heroku/go"
+  ]
+}
