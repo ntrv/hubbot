@@ -12,19 +12,7 @@ import (
 	gh "gopkg.in/go-playground/webhooks.v3/github"
 )
 
-func main() {
-	e := echo.New()
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	if os.Getenv("X_HUB_SECRET") != "" {
-		e.Use(
-			github.VerifyMiddleware(
-				github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
-			),
-		)
-	}
-
+func hubbotHandler() echo.HandlerFunc {
 	hook := github.NewHook()
 
 	if os.Getenv("ROOM_ID") != "" && os.Getenv("API_KEY") != "" {
@@ -46,8 +34,23 @@ func main() {
 			gh.PullRequestEvent,
 		)
 	}
+	return hook.ParsePayloadHandler
+}
 
-	e.POST("/", hook.ParsePayloadHandler)
+func main() {
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	if os.Getenv("X_HUB_SECRET") != "" {
+		e.Use(
+			github.VerifyMiddleware(
+				github.VerifyConfig{Secret: os.Getenv("X_HUB_SECRET")},
+			),
+		)
+	}
+
+	e.POST("/", hubbotHandler())
 
 	s := &http.Server{
 		Addr:         ":" + os.Getenv("PORT"),
