@@ -13,6 +13,18 @@
   version = "v3.2.0"
 
 [[projects]]
+  name = "github.com/felixge/httpsnoop"
+  packages = ["."]
+  revision = "eadd4fad6aac69ae62379194fe0219f3dbc80fd3"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/golang/gddo"
+  packages = ["httputil/header"]
+  revision = "a475e0307621ec6832db210443de8f9ff6ff3148"
+
+[[projects]]
   branch = "master"
   name = "github.com/griffin-stewie/go-chatwork"
   packages = ["."]
@@ -55,6 +67,12 @@
   name = "github.com/mattn/go-isatty"
   packages = ["."]
   revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mitchellh/go-server-timing"
+  packages = ["."]
+  revision = "d145200e1f903b0ea9e6fd99eea2fb9621e0feaa"
 
 [[projects]]
   name = "github.com/pmezard/go-difflib"
@@ -105,6 +123,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b6b90711707f263db4add49bb6a5715d055d91c992e6584330fb3810ebcfafd6"
+  inputs-digest = "141c172a50181bfa5c8f0ef7c2e35ea893434e57df3313c092b18de2639f1e85"
   solver-name = "gps-cdcl"
   solver-version = 1

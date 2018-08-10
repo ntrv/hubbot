@@ -9,13 +9,20 @@ import (
 
 	chatwork "github.com/griffin-stewie/go-chatwork"
 	"github.com/labstack/echo"
+	servertiming "github.com/mitchellh/go-server-timing"
 )
 
 type PostProcessFunc func(msg string, c echo.Context) error
 
 func SendChatworkPostProcess(msg string, c echo.Context) error {
+	// Add Server-Timing Header
+	timing := servertiming.FromContext(c.Request().Context())
+	m := timing.NewMetric("cw").WithDesc("Post Chatwork").Start()
+
+	// Measure Processing Time
 	cw := chatwork.NewClient(os.Getenv("API_KEY"))
 	res64, err := cw.PostRoomMessage(os.Getenv("ROOM_ID"), msg)
+	m.Stop()
 	if err != nil {
 		return echo.NewHTTPError(
 			http.StatusInternalServerError,
