@@ -1,17 +1,20 @@
 package handler
 
 import (
-	"net/http"
 	"errors"
+	"net/http"
 
 	"github.com/labstack/echo"
+	servertiming "github.com/mitchellh/go-server-timing"
 	gh "github.com/ntrv/hubbot/github"
-	"gopkg.in/go-playground/webhooks.v3/github"
 	"github.com/ntrv/hubbot/message/chatwork"
+	"gopkg.in/go-playground/webhooks.v3/github"
 )
 
 func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
 	return func(payload interface{}, c echo.Context) error {
+		timing := servertiming.FromContext(c.Request().Context())
+
 		pl, ok := payload.(github.PushPayload)
 		if !ok {
 			return echo.NewHTTPError(
@@ -34,14 +37,15 @@ func Push(f PostProcessFunc) gh.ProcessPayloadFunc {
 			)
 		}
 
+		m := timing.NewMetric("template").WithDesc("Generate Message").Start()
 		msg, err := chatwork.PushMsg(pl)
+		m.Stop()
 		if err != nil {
 			return echo.NewHTTPError(
 				http.StatusInternalServerError,
 				err.Error(),
 			)
 		}
-
 		return f(msg, c)
 	}
 }
